@@ -11,23 +11,22 @@
 
 if(isset($_POST["export_subscribe"]))
 {
-   $user='root';
+	$user='root';
 	$pass='';
-    $dbname='database_name';
-	
+	$dbname='database_name';
 
-$conn = new PDO('mysql:host=localhost;dbname=database_name', $user, $pass);
+	$conn = new PDO('mysql:host=localhost;dbname=database_name', $user, $pass);
 	if (!$conn) {
-		die("Connection failed: " . $conn->connect_error);
+	die("Connection failed: " . $conn->connect_error);
 	}
-  	$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    
-  $query = "SELECT * FROM `subscribed_user` WHERE 1";
-  $stmt=$conn->prepare($query);
-  $stmt->execute();
-  $result=$stmt->fetchAll();
-  $conn=null;
-  $id=0;
+	$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+$query = "SELECT * FROM `subscribed_user` WHERE 1";
+$stmt=$conn->prepare($query);
+$stmt->execute();
+$result=$stmt->fetchAll();
+$conn=null;
+$id=0;
   $output = '';
    if($result)
  {
