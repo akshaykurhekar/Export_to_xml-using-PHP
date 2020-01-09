@@ -1,16 +1,26 @@
-	<!-- This is a code to download file in xml formate from database using object PHP and HTML 	 -->	
+<!-- This is a code to download file in xml formate from database using object PHP and HTML 	 -->	
 		
 				<!-- FRONT END -->
 <form action="export.php" method="POST">
 	<input type="submit" class="btn-success border-secondary" style="border-radius: 10px;" name="export_subscribe" value="Export Users Email">                
 </form>
 
-				<!-- BACK END -->
+				<!-- BACK END 
+	TO USE THIS CODE ,COPY BACK END PART TO NEW PAGE AND GIVE file name AS export.php-->
 <?php 
 
 if(isset($_POST["export_subscribe"]))
 {
-    include 'config.php';
+   $user='root';
+	$pass='';
+    $dbname='database_name';
+	
+
+$conn = new PDO('mysql:host=localhost;dbname=database_name', $user, $pass);
+	if (!$conn) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+  	$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     
   $query = "SELECT * FROM `subscribed_user` WHERE 1";
   $stmt=$conn->prepare($query);
@@ -44,7 +54,8 @@ if(isset($_POST["export_subscribe"]))
  }
  else{
   header('location:index.php?q='.md5(404));
+
 }
 }
 
- ?>				
+ ?>
